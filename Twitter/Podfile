@@ -6,5 +6,6 @@ target 'Twitter' do
   use_frameworks!
 
   # Pods for Twitter
+  pod 'LBTAComponents', '~> 0.1.9'
 
 end
