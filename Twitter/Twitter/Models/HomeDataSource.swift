@@ -9,7 +9,13 @@ import LBTAComponents
 
 class HomeDataSource: Datasource {
     
-    let words = ["user1", "user2", "user3"]
+    let users: [User] = {
+        let brianUser = User(name: "Test", userName: "@testtest", bioText: "some test bio")
+        let rayUser = User(name: "Ray Wendelich", userName: "@raywendelich", bioText: "Ray Wendelich is Iphone developer  and tweets on topic iphone")
+        return [brianUser, rayUser]
+    }()
+    
+    //let words = ["user1", "user2", "user3"]
     
     override func footerClasses() -> [DatasourceCell.Type]? {
         return [UserFooter.self]
@@ -24,10 +30,10 @@ class HomeDataSource: Datasource {
     }
     
     override func item(_ indexPath: IndexPath) -> Any? {
-        return words[indexPath.item]
+        return users[indexPath.item]
     }
     
     override func numberOfItems(_ section: Int) -> Int {
-        return words.count
+        return users.count
     }
 }

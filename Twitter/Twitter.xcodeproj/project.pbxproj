@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040B3FB020156255000B7C16 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040B3FAF20156255000B7C16 /* User.swift */; };
 		04364428200A6BE500CC5C64 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04364427200A6BE500CC5C64 /* AppDelegate.swift */; };
 		0436442F200A6BE500CC5C64 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0436442E200A6BE500CC5C64 /* Assets.xcassets */; };
 		04364432200A6BE500CC5C64 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04364430200A6BE500CC5C64 /* LaunchScreen.storyboard */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		040B3FAF20156255000B7C16 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		04364424200A6BE500CC5C64 /* Twitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Twitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04364427200A6BE500CC5C64 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0436442E200A6BE500CC5C64 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				04E49293200CFC7D0026E8AF /* HomeDataSource.swift */,
+				040B3FAF20156255000B7C16 /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 			files = (
 				04E49294200CFC7D0026E8AF /* HomeDataSource.swift in Sources */,
 				04364428200A6BE500CC5C64 /* AppDelegate.swift in Sources */,
+				040B3FB020156255000B7C16 /* User.swift in Sources */,
 				04E49292200CFC0C0026E8AF /* Cells.swift in Sources */,
 				04ED8D18200A73AF005309DA /* HomeController.swift in Sources */,
 				04E4928D200B2B530026E8AF /* HomeDataSourceController.swift in Sources */,
