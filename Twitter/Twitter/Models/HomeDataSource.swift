@@ -10,12 +10,11 @@ import LBTAComponents
 class HomeDataSource: Datasource {
     
     let users: [User] = {
-        let brianUser = User(name: "Test", userName: "@testtest", bioText: "some test bio")
-        let rayUser = User(name: "Ray Wendelich", userName: "@raywendelich", bioText: "Ray Wendelich is Iphone developer  and tweets on topic iphone")
+        let brianUser = User(name: "Test", userName: "@testtest", bioText: "Iphone, ipad , ios Programing Community. Join us to learn Swift, Object-C and build IOS apps" , profileImage: #imageLiteral(resourceName: "steve"))
+        let rayUser = User(name: "Ray Wendelich", userName: "@raywendelich", bioText: "Ray Wendelich is Iphone developer  and tweets on topic iphone", profileImage: #imageLiteral(resourceName: "billget"))
+        
         return [brianUser, rayUser]
     }()
-    
-    //let words = ["user1", "user2", "user3"]
     
     override func footerClasses() -> [DatasourceCell.Type]? {
         return [UserFooter.self]
