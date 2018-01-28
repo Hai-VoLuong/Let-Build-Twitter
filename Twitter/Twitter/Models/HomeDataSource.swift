@@ -12,10 +12,11 @@ import SwiftyJSON
 class HomeDataSource: Datasource, JSONDecodable {
     
     let users: [User]
+    let tweets: [Tweet]
+    
     required init(json: JSON) throws {
         
         var users = [User]()
-        
         let array = json["users"].array
         for userJson in array! {
             let name = userJson["name"].stringValue
@@ -25,16 +26,24 @@ class HomeDataSource: Datasource, JSONDecodable {
             let user = User(name: name, userName: username, bioText: bio, profileImage: UIImage())
             users.append(user)
         }
-        self.users = users
-    }
-    
-    let tweets: [Tweet] = {
-       let brianUser = User(name: "Brian Voong", userName: "@buildthatapp", bioText: "Iphone, ipad, ios programing community. Join us to learn swift, Iphone, ipad, ios programing community. Join us to learn swift", profileImage: #imageLiteral(resourceName: "billget"))
-        let tweet = Tweet(user: brianUser, message: "Welcome to to the episicode 9 of the Iphone, ipad , ios Programing Community. Join us to learn Swift, Object-C and build IOS apps Ray Wendelich is Iphone developer  and tweets on topic iphone Iphone, ipad , ios Programing Community. Join us to learn Swift, Object-C and build IOS app")
         
-        let tweet2 = Tweet(user: brianUser, message: "This is the second tweet message, Object-C and build IOS apps Ray Wendelich is Iphone developer  and tweets on topic iphone Iphone, ipad , ios Programing Community. Join us to learn Swift, Object-C and build IOS app")
-       return [tweet, tweet2]
-    }()
+        var tweets = [Tweet]()
+        let tweetsJsonArray = json["tweets"].array
+        for tweetJson in tweetsJsonArray! {
+            let useJson = tweetJson["user"]
+            
+            let name = useJson["name"].stringValue
+            let username = useJson["username"].stringValue
+            let bio = useJson["bio"].stringValue
+            let user = User(name: name, userName: username, bioText: bio, profileImage: UIImage())
+            let message = tweetJson["message"].stringValue
+            let tweet = Tweet(user: user, message: message)
+            tweets.append(tweet)
+        }
+        
+        self.users = users
+        self.tweets = tweets
+    }
     
     override func footerClasses() -> [DatasourceCell.Type]? {
         return [UserFooter.self]
