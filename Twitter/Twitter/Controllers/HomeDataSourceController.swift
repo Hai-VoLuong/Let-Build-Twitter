@@ -53,20 +53,27 @@ class HomeDataSourceController: DatasourceController {
     
     // MARK: - Cell View Size
     override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if let user = self.datasource?.item(indexPath) as? User {
-            
-            // let's estimate bio text
-            let approximateWithOfBioTextView = view.frame.width - 12 - 50 - 12 - 2
-            let size = CGSize(width: approximateWithOfBioTextView, height: 1000)
-            let attributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 15)]
-            
-            let estimateFrame = NSString(string: user.bioText)
-                .boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
-            
-            return CGSize(width: view.frame.width, height: estimateFrame.height + 86)
-        }
         
+        if indexPath.section == 0 {
+            guard let user = self.datasource?.item(indexPath) as? User else { return .zero }
+            let estimateHeight = estimateHeightForText(user.bioText)
+            return CGSize(width: view.frame.width, height: estimateHeight + 86)
+        } else if indexPath.section == 1 {
+            guard let tweet = datasource?.item(indexPath) as? Tweet else { return .zero }
+            let estimateHeight = estimateHeightForText(tweet.message)
+            return CGSize(width: view.frame.width, height: estimateHeight + 86)
+        }
         return CGSize(width: view.frame.width, height: 200)
+    }
+    
+    private func estimateHeightForText(_ text: String) -> CGFloat {
+        let approximateWithOfBioTextView = view.frame.width - 12 - 50 - 12 - 2
+        let size = CGSize(width: approximateWithOfBioTextView, height: 1000)
+        let attributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 15)]
+        
+        let estimateFrame = NSString(string: text)
+            .boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
+        return estimateFrame.height
     }
     
     // MARK: - Header View Size
