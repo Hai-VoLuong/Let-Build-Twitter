@@ -11,6 +11,15 @@ import SwiftyJSON
 
 class HomeDataSourceController: DatasourceController {
     
+    let errorMessageLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Apologies something went wrong. Please try again later..."
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.isHidden = true
+        return label
+    }()
+    
     // update ui when xoay Điện thoại
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
         collectionViewLayout.invalidateLayout()
@@ -18,9 +27,21 @@ class HomeDataSourceController: DatasourceController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(errorMessageLabel)
+        errorMessageLabel.fillSuperview()
+        
         collectionView?.backgroundColor = UIColor(r: 232, g: 236, b: 241)
         setupNavigationBarItems()
-        Service.sharedInstance.fetchHomeFeed { (homeDataSource) in
+        Service.sharedInstance.fetchHomeFeed { (homeDataSource, error) in
+            if let error = error {
+                self.errorMessageLabel.isHidden = false
+                if let apiError = error as? APIError<Service.JSONError> {
+                    if apiError.response?.statusCode != 200 {
+                        self.errorMessageLabel.text = "Status code was not 200"
+                    }
+                }
+                return
+            }
             self.datasource = homeDataSource
         }
     }
