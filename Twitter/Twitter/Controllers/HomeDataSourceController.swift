@@ -33,8 +33,13 @@ class HomeDataSourceController: DatasourceController {
         collectionView?.backgroundColor = UIColor(r: 232, g: 236, b: 241)
         setupNavigationBarItems()
         Service.sharedInstance.fetchHomeFeed { (homeDataSource, error) in
-            if let _ = error {
+            if let error = error {
                 self.errorMessageLabel.isHidden = false
+                if let apiError = error as? APIError<Service.JSONError> {
+                    if apiError.response?.statusCode != 200 {
+                        self.errorMessageLabel.text = "Status code was not 200"
+                    }
+                }
                 return
             }
             self.datasource = homeDataSource
