@@ -7,6 +7,7 @@
 
 import LBTAComponents
 import TRON
+import SwiftyJSON
 
 class HomeDataSourceController: DatasourceController {
     
@@ -17,13 +18,11 @@ class HomeDataSourceController: DatasourceController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         collectionView?.backgroundColor = UIColor(r: 232, g: 236, b: 241)
-        
         setupNavigationBarItems()
-        
-        let homeDataSource = HomeDataSource()
-        self.datasource = homeDataSource
+        Service.sharedInstance.fetchHomeFeed { (homeDataSource) in
+            self.datasource = homeDataSource
+        }
     }
     
     // MARK: - Collection view
