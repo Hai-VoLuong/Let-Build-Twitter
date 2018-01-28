@@ -6,8 +6,16 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 struct Tweet {
     let user: User
     let message: String
+    
+    init(json: JSON) {
+        let userJSon = json["user"]
+        self.user = User(json: userJSon)
+        
+        self.message = json["message"].stringValue
+    }
 }
